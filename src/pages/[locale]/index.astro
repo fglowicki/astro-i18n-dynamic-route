@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import {getLangFromUrl, useTranslatedPath, useTranslations, getStaticPathsForLanguages} from '../../i18n/utils';
+
+export async function getStaticPaths() {
+  return getStaticPathsForLanguages();
+}
+
+const t = useTranslations(Astro.url) ;
+const lang = getLangFromUrl(Astro.url);
+const tranlatedPath = useTranslatedPath(lang)
+---
+
+<Layout title="Welcome to Astro.">
+	<main>
+		<h1>Home! {t('home')}</h1>
+		<a href={tranlatedPath("product")}> aaaa </a>
+	</main>
+</Layout>
