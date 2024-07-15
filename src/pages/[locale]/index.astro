@@ -1,31 +1,35 @@
 ---
+import { Image } from 'astro:assets'
 
-import { Image } from 'astro:assets';
-
-import image from '../../assets/image.jpg';
-import { ReactComponent } from '../../components/ReactComponent';
-import VueImage from '../../components/VueComponent.vue';
-import {getLangFromUrl, useTranslatedPath, useTranslations, getStaticPathsForLanguages} from '../../i18n/utils';
-import Layout from '../../layouts/Layout.astro';
+import image from '../../assets/image.jpg'
+import { ReactComponent } from '../../components/ReactComponent'
+import VueImage from '../../components/VueComponent.vue'
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  useTranslations,
+  getStaticPathsForLanguages
+} from '../../i18n/utils'
+import Layout from '../../layouts/Layout.astro'
 
 export async function getStaticPaths() {
-  return getStaticPathsForLanguages();
+  return getStaticPathsForLanguages()
 }
 
-const t = useTranslations(Astro.url) ;
-const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(Astro.url)
+const lang = getLangFromUrl(Astro.url)
 const tranlatedPath = useTranslatedPath(lang)
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
-		<h1>Home! {t('home')}</h1>
-		<ReactComponent>
-			<Image src={image} alt="" />
-		</ReactComponent>
-		<VueImage>
-			<Image src={image} alt="" />
-		</VueImage>
-		<a href={tranlatedPath("product")}> aaaa </a>
-	</main>
+  <main>
+    <h1>Home! {t('home')}</h1>
+    <ReactComponent>
+      <Image src={image} alt="" />
+    </ReactComponent>
+    <VueImage>
+      <Image src={image} alt="" />
+    </VueImage>
+    <a href={tranlatedPath('product')}> aaaa </a>
+  </main>
 </Layout>
