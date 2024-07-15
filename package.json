@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "lint": "eslint . --ext js,ts,tsx,vue,astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.1",
@@ -15,5 +16,11 @@
     "astro": "^4.11.5",
     "astro-seo": "^0.8.4",
     "typescript": "^5.5.3"
+  },
+  "devDependencies": {
+    "@sparing-software/eslint-config": "^1.5.0",
+    "@typescript-eslint/parser": "^7.16.0",
+    "eslint": "^8.57.0",
+    "eslint-plugin-astro": "^1.2.3"
   }
 }
