@@ -1,9 +1,9 @@
 ---
 import { Image } from 'astro:assets'
 
-import image from '../../assets/image.jpg'
-import { ReactComponent } from '../../components/ReactComponent'
-import VueImage from '../../components/VueComponent.vue'
+import image from '@assets/image.jpg'
+import { ReactComponent } from '@components/ReactComponent'
+import VueComponent from '@components/VueComponent.vue'
 import {
   getLangFromUrl,
   useTranslatedPath,
@@ -27,9 +27,9 @@ const tranlatedPath = useTranslatedPath(lang)
     <ReactComponent>
       <Image src={image} alt="" />
     </ReactComponent>
-    <VueImage>
+    <VueComponent>
       <Image src={image} alt="" />
-    </VueImage>
+    </VueComponent>
     <a href={tranlatedPath('product')}> aaaa </a>
   </main>
 </Layout>
