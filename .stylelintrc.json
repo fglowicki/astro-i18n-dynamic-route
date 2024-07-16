@@ -1,0 +1,3 @@
+{
+  "extends": ["@sparing-software/stylelint-config", "stylelint-config-astro"]
+}

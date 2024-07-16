@@ -30,10 +30,14 @@
   "devDependencies": {
     "@sparing-software/eslint-config": "^1.5.0",
     "@sparing-software/prettier-config": "^1.0.0",
+    "@sparing-software/stylelint-config": "^2.2.0",
     "@typescript-eslint/parser": "^7.16.0",
     "eslint": "^8.57.0",
     "eslint-plugin-astro": "^1.2.3",
     "prettier": "^3.3.3",
-    "prettier-plugin-astro": "^0.14.0"
+    "prettier-plugin-astro": "^0.14.0",
+    "stylelint": "^16.7.0",
+    "stylelint-config-astro": "^1.0.4",
+    "stylelint-config-standard": "^36.0.1"
   }
 }
