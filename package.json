@@ -9,7 +9,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "prettier": "prettier . --write",
-    "lint": "eslint . --ext js,ts,tsx,vue,astro"
+    "lint": "eslint . --ext js,ts,tsx,vue,astro",
+    "unlighthouse": "unlighthouse",
+    "unlighthouse-ci": "unlighthouse-ci"
   },
   "dependencies": {
     "@astrojs/check": "^0.8.1",
@@ -38,6 +40,8 @@
     "prettier-plugin-astro": "^0.14.0",
     "stylelint": "^16.7.0",
     "stylelint-config-astro": "^1.0.4",
-    "stylelint-config-standard": "^36.0.1"
+    "stylelint-config-standard": "^36.0.1",
+    "unlighthouse": "^0.13.2",
+    "vite": "^5.3.4"
   }
 }
