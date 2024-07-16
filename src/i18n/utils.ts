@@ -1,37 +1,64 @@
-import { defaultLocale, locales } from './config'
-import { translations, pages } from './translations'
+// i18n util based on https://docs.astro.build/en/recipes/i18n/#translate-routes
 
-export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/')
-  if (lang in translations) return lang as keyof typeof translations
+import { defaultLocale, locales } from './config'
+import { translations, routes } from './translations'
+
+type Path = keyof (typeof routes)[typeof defaultLocale]
+type Locale = keyof typeof translations
+type TranslationKey = keyof (typeof translations)[typeof defaultLocale]
+
+export function getLocaleFromUrl(url: URL) {
+  const [, locale] = url.pathname.split('/')
+  if (locale in translations) return locale as Locale
   return defaultLocale
 }
 
+export function getRouteFromUrl(url: URL) {
+  const locale = getLocaleFromUrl(url)
+  const pathname = new URL(url).pathname
+  const parts = pathname?.split('/')
+
+  const path = Object.values(routes[locale]).find(route =>
+    parts.includes(route)
+  )
+  if (!path) return
+
+  const getKeyByValue = (
+    obj: Record<string, string>,
+    value: string
+  ): string | undefined => Object.keys(obj).find(key => obj[key] === value)
+  const reversedKey = getKeyByValue(routes[locale], path)
+  if (!reversedKey) return
+
+  return reversedKey as Path
+}
+
 export function useTranslations(url: URL) {
-  const lang = getLangFromUrl(url)
-  return function t(key: keyof (typeof translations)[typeof defaultLocale]) {
-    return translations[lang][key] ?? translations[defaultLocale][key]
+  const locale = getLocaleFromUrl(url)
+  return function t(key: TranslationKey) {
+    return translations[locale][key] ?? translations[defaultLocale][key]
   }
 }
 
-export function useTranslatedPath(locale: keyof typeof translations) {
-  return function translatePath(
-    path: keyof typeof pages,
-    lang: keyof typeof translations = locale
-  ) {
-    return `/${lang}/${pages[path][lang]}/`
+export function useTranslatedPath(locale: Locale) {
+  return function translatePath(path?: Path, lang: Locale = locale) {
+    if (!path) return `/${lang}`
+    const hasTranslation = routes[lang] && routes[lang][path]
+    const translatedPath = hasTranslation ? '/' + routes[lang][path] : path
+
+    return `/${lang}${translatedPath}`
   }
 }
 
-export function getStaticPathsForLanguages(path?: keyof typeof pages) {
+export function getStaticPathsForLocales(path?: Path) {
   return locales
-    .map(locale => {
-      return !path
+    .map(locale =>
+      !path
         ? { locale }
         : {
             locale,
-            [path]: pages[path][locale]
+            [path]: routes[locale][path]
           }
-    })
+    )
     .map(params => ({ params }))
 }

@@ -1,12 +1,9 @@
 ---
 import Layout from '../../../layouts/Layout.astro'
-import {
-  getStaticPathsForLanguages,
-  useTranslations
-} from '../../../i18n/utils'
+import { getStaticPathsForLocales, useTranslations } from '../../../i18n/utils'
 
 export async function getStaticPaths() {
-  return getStaticPathsForLanguages('product')
+  return getStaticPathsForLocales('product')
 }
 
 const t = useTranslations(Astro.url)

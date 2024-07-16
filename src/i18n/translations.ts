@@ -1,7 +1,9 @@
-export const pages = {
-  product: {
-    pl: 'produkt',
-    en: 'product'
+export const routes = {
+  pl: {
+    product: 'produkt'
+  },
+  en: {
+    product: 'product'
   }
 } as const
 

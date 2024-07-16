@@ -5,19 +5,19 @@ import image from '@assets/image.jpg'
 import { ReactComponent } from '@components/ReactComponent'
 import VueComponent from '@components/VueComponent.vue'
 import {
-  getLangFromUrl,
+  getLocaleFromUrl,
   useTranslatedPath,
   useTranslations,
-  getStaticPathsForLanguages
+  getStaticPathsForLocales
 } from '../../i18n/utils'
 import Layout from '../../layouts/Layout.astro'
 
 export async function getStaticPaths() {
-  return getStaticPathsForLanguages()
+  return getStaticPathsForLocales()
 }
 
 const t = useTranslations(Astro.url)
-const lang = getLangFromUrl(Astro.url)
+const lang = getLocaleFromUrl(Astro.url)
 const tranlatedPath = useTranslatedPath(lang)
 ---
 

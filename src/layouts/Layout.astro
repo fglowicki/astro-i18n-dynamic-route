@@ -1,13 +1,19 @@
 ---
 import { SEO } from 'astro-seo'
-import { getLangFromUrl } from '../i18n/utils'
+import {
+  getLocaleFromUrl,
+  getRouteFromUrl,
+  useTranslatedPath
+} from '../i18n/utils'
 
 interface Props {
   title: string
 }
 
 const { title } = Astro.props
-const lang = getLangFromUrl(Astro.url)
+const lang = getLocaleFromUrl(Astro.url)
+const route = getRouteFromUrl(Astro.url)
+const tranlatedPath = useTranslatedPath(lang)
 ---
 
 <!doctype html>
@@ -33,6 +39,10 @@ const lang = getLangFromUrl(Astro.url)
       crossorigin="anonymous"></script>
   </head>
   <body>
+    <nav>
+      <a href={tranlatedPath(route, 'en')}>EN</a>
+      <a href={tranlatedPath(route, 'pl')}>PL</a>
+    </nav>
     <slot />
   </body>
 </html>
